@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Isabelle Banjac | Frontend Developer</title>
+  <link rel="stylesheet" href="style.css">
+  </head>
+<body>
+<header>
+  <div class="header-left">
+    <h1>Portfolio</h1>
+    <p>Frontend Developer Student</p>
+  </div>
+  
+  <div class="header-right">
+    <nav>
+      <ul>
+        <li><a href="#about" data-sv="Om mig" data-en="About Me">Om mig</a></li>
+        <li><a href="#projects" data-sv="Projekt" data-en="Projects">Projekt</a></li>
+        <li><a href="#skills" data-sv="Skills" data-en="Skills">Skills</a></li>
+        <li><a href="#additional-skills" data-sv="Additional skills" data-en="Additional Skills">Additional skills</a></li>
+        <li><a href="#contact" data-sv="Kontakt" data-en="Contact">Kontakt</a></li>
+      </ul>
+    </nav>
+    <button class="language-toggle" onclick="toggleLanguage()">EN</button>
+  </div>
+</header>
+
+<section id="about">
+  <img src="img/Bella.jpg" alt="Porträtt" class="profile-pic">
+  <div class="about-content">
+    <h2 data-sv="Om mig" data-en="About Me">Om mig</h2>
+    <p data-sv="Jag är en LIA-sökande frontend-utvecklarstudent som älskar att omvandla idéer till digitala upplevelser. Design, struktur och användarvänlighet är min passion, och jag bygger moderna, responsiva webbplatser som både ser fantastiska ut och fungerar sömlöst på alla enheter. Med erfarenhet av backend kan jag även skapa lösningar som fungerar lika bra bakom kulisserna som på skärmen."
+       data-en="I am a frontend development student seeking an internship (LIA) with a passion for turning ideas into engaging digital experiences. I love crafting modern, responsive websites that not only look amazing but also work seamlessly on any device. With backend experience, I can ensure my solutions run just as smoothly behind the scenes as they do on the screen.">
+       Jag är en LIA-sökande frontend-utvecklarstudent som älskar att omvandla idéer till digitala upplevelser. Design, struktur och användarvänlighet är min passion, och jag bygger moderna, responsiva webbplatser som både ser fantastiska ut och fungerar sömlöst på alla enheter. Med erfarenhet av backend kan jag även skapa lösningar som fungerar lika bra bakom kulisserna som på skärmen.
+    </p>
+
+  </div>
+</section>
+
+  <section id="projects">
+  <h2 data-sv="Projekt" data-en="Projects">Projekt</h2>
+  <div class="project-grid">
+
+    <div class="project-card">
+      <h3 data-sv="Freaky Fashion - Responsiv E-handel" data-en="Freaky Fashion - Responsive E-commerce">
+        Freaky Fashion - Responsiv E-handel
+      </h3>
+      <video src="videos/freakyfashion.mp4" controls width="100%"></video>
+      <p data-sv="En e-handel sida där fokus låg på responsiv design, semantisk HTML och CSS." 
+         data-en="An e-commerce website focused on responsive design, semantic HTML and CSS.">
+         En e-handel sida där fokus låg på responsiv design, semantisk HTML och CSS.
+      </p>
+      <a href="https://github.com/IsabelleBan/FreakyFashion.git" target="_blank" 
+         data-sv="Se kod" data-en="View Code">Se kod</a>
+    </div>
+
+    <div class="project-card">
+      <h3 data-sv="Retrendo - Köp & Sälj Plattform" data-en="Retrendo - Buy & Sell Platform">
+        Retrendo - Köp & Sälj Plattform
+      </h3>
+      <video src="videos/retrendo.mp4" controls width="100%"></video>
+      <p data-sv="Gruppprojekt där vi byggde en plattform för att köpa och sälja produkter. Funktioner inkluderar sökning, filtrering och användarskapade inlägg." 
+         data-en="Group project where we built a platform to buy and sell products. Features include search, filtering, and user-generated posts.">
+         Gruppprojekt där vi byggde en plattform för att köpa och sälja produkter. Funktioner inkluderar sökning, filtrering och användarskapade inlägg.
+      </p>
+      <a href="https://github.com/IsabelleBan/retrendo.git" target="_blank" 
+         data-sv="Se kod" data-en="View Code">Se kod</a>
+    </div>
+
+    <div class="project-card">
+      <h3 data-sv="Freaky Fashion 2 - Angular & TypeScript" data-en="Freaky Fashion 2 - Angular & TypeScript">
+        Freaky Fashion 2 - Angular & TypeScript
+      </h3>
+      <video src="videos/freaky.mp4" controls width="100%"></video>
+      <p data-sv="En modern version av Freaky Fashion byggd med Angular och TypeScript. Här låg fokus på komponentbaserad utveckling och dynamisk datahantering från backend." 
+         data-en="A modern version of Freaky Fashion built with Angular and TypeScript. Focus was on component-based development and dynamic data handling from the backend.">
+         En modern version av Freaky Fashion byggd med Angular och TypeScript. Här låg fokus på komponentbaserad utveckling och dynamisk datahantering från backend.
+      </p>
+      <a href="https://github.com/IsabelleBan/Javascript3-FreakyFashion.git" target="_blank" 
+         data-sv="Se kod" data-en="View Code">Se kod</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <h2 data-sv="Skills" data-en="Skills">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card">HTML, CSS</div>
+    <div class="skill-card">JavaScript 1</div>
+    <div class="skill-card" data-sv="Agil utveckling & SCRUM" data-en="Agile Development & SCRUM">Agil utveckling & SCRUM</div>
+    <div class="skill-card" data-sv="Git och versionshantering" data-en="Git and Version Control">Git och versionshantering</div>
+    <div class="skill-card">UX/UI</div>
+    <div class="skill-card">JavaScript 2, React</div>
+    <div class="skill-card">JavaScript 3, Angular</div>
+    <div class="skill-card" data-sv="Backend 1, API:er och databashantering (Node.js, Express, SQLite)" 
+         data-en="Backend 1, APIs and Database Management (Node.js, Express, SQLite)">
+         Backend 1, API:er och databashantering (Node.js, Express, SQLite)
+    </div>
+    <div class="skill-card" data-sv="Backend 2, objekt orienterad programmering med C#" 
+         data-en="Backend 2, Object-Oriented Programming with C#">
+         Backend 2, objekt orienterad programmering med C#
+    </div>
+  </div>
+</section>
+
+<section id="additional-skills">
+  <h2 data-sv="Additional Skills" data-en="Additional Skills">Additional Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card">WordPress</div>
+    <div class="skill-card">Python</div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 data-sv="Kontakt" data-en="Contact">Kontakt</h2>
+  <p><span data-sv="Mail:" data-en="Email:">Mail:</span> <a href="mailto:banjacisabelle@gmail.com">banjacisabelle@gmail.com</a></p>
+  <p><span data-sv="LinkedIn:" data-en="LinkedIn:">LinkedIn:</span> <a href="https://www.linkedin.com/in/isabelle-banjac" target="_blank">linkedin.com/in/isabelle-banjac</a></p>
+  <p><span data-sv="GitHub:" data-en="GitHub:">GitHub:</span> <a href="https://github.com/IsabelleBan" target="_blank">https://github.com/IsabelleBan</a></p>
+  <p><span data-sv="Telefon:" data-en="Phone:">Telefon:</span> 0733 92 49 02</p>
+</section>
+
+
+  <footer>
+    <p></p>&copy; 2025 Isabelle Banjac.</p>
+  </footer>
+
+  <script>
+    let currentLanguage = 'sv';
+
+    function toggleLanguage() {
+      const button = document.querySelector('.language-toggle');
+      const elementsWithTranslation = document.querySelectorAll('[data-sv][data-en]');
+      
+      if (currentLanguage === 'sv') {
+        // Switch to English
+        currentLanguage = 'en';
+        button.textContent = 'SV';
+        
+        elementsWithTranslation.forEach(element => {
+          element.textContent = element.getAttribute('data-en');
+        });
+      } else {
+        // Switch to Swedish
+        currentLanguage = 'sv';
+        button.textContent = 'EN';
+        
+        elementsWithTranslation.forEach(element => {
+          element.textContent = element.getAttribute('data-sv');
+        });
+      }
+    }
+  </script>
+</body>
+</html>
+
+
