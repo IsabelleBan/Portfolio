@@ -498,10 +498,16 @@
       }
 
       #about {
-        flex-direction: column;
-        text-align: center;
-        gap: 2.5rem;
-        padding: 2rem;
+        display: block; /* Bilden ovanför texten */
+      }
+
+      #about .about-content {
+        text-align: left; /* Se till att texten ligger till vänster */
+        margin-top: 15px; /* Lite avstånd från bilden */
+      }
+
+      #about .about-content h2 {
+        text-align: left; /* H2 till vänster */
       }
 
       .profile-pic {
