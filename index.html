@@ -15,6 +15,7 @@
   </div>
   
   <div class="header-right">
+    <!-- Regular navigation for desktop -->
     <nav>
       <ul>
         <li><a href="#about" data-sv="Om mig" data-en="About Me">Om mig</a></li>
@@ -25,8 +26,29 @@
       </ul>
     </nav>
     <button class="language-toggle" onclick="toggleLanguage()">EN</button>
+    
+    <!-- Burger menu for mobile -->
+    <div class="burger-menu" onclick="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </header>
+
+<!-- Mobile navigation overlay -->
+<div class="nav-overlay" id="navOverlay">
+  <nav>
+    <ul>
+      <li><a href="#about" data-sv="Om mig" data-en="About Me" onclick="closeMobileMenu()">Om mig</a></li>
+      <li><a href="#projects" data-sv="Projekt" data-en="Projects" onclick="closeMobileMenu()">Projekt</a></li>
+      <li><a href="#skills" data-sv="Skills" data-en="Skills" onclick="closeMobileMenu()">Skills</a></li>
+      <li><a href="#additional-skills" data-sv="Additional skills" data-en="Additional Skills" onclick="closeMobileMenu()">Additional skills</a></li>
+      <li><a href="#contact" data-sv="Kontakt" data-en="Contact" onclick="closeMobileMenu()">Kontakt</a></li>
+    </ul>
+  </nav>
+  <button class="language-toggle" onclick="toggleLanguage()">EN</button>
+</div>
 
 <section id="about">
   <img src="img/Bella.jpg" alt="Porträtt" class="profile-pic">
@@ -44,18 +66,45 @@
   <h2 data-sv="Projekt" data-en="Projects">Projekt</h2>
   <div class="project-grid">
 
-    <div class="project-card">
-      <h3 data-sv="Freaky Fashion - Responsiv E-handel" data-en="Freaky Fashion - Responsive E-commerce">
-        Freaky Fashion - Responsiv E-handel
-      </h3>
-      <video src="videos/freaky1.mp4" controls width="100%"></video>
-      <p data-sv="En e-handel sida där fokus låg på responsiv design, semantisk HTML och CSS." 
-         data-en="An e-commerce website focused on responsive design, semantic HTML and CSS.">
-         En e-handel sida där fokus låg på responsiv design, semantisk HTML och CSS.
-      </p>
-      <a href="https://github.com/IsabelleBan/FreakyFashion.git" target="_blank" 
-         data-sv="Se kod" data-en="View Code">Se kod</a>
-    </div>
+<div class="project-card">
+  <h3 data-sv="Freaky Fashion - Responsiv E-handel" 
+      data-en="Freaky Fashion - Responsive E-commerce">
+    Freaky Fashion - Responsiv E-handel
+  </h3>
+
+  <!-- Bildgalleri -->
+  <div class="image-gallery">
+    <img src="img/freaky1.png" alt="Freaky Fashion Startsida" class="project-image active">
+    <img src="img/freaky2.png" alt="Freaky Fashion Produkter" class="project-image">
+    <img src="img/freaky5.png" alt="Freaky Fashion Mobil" class="project-image">
+    <img src="img/freaky4.png" alt="Freaky Fashion Mobil" class="project-image">
+    <img src="img/freaky6.png" alt="Freaky Fashion Mobil" class="project-image">
+    <img src="img/freaky7.png" alt="Freaky Fashion Mobil" class="project-image small-image">
+  </div>
+
+  <!-- Dots för att byta bild -->
+  <div class="image-dots">
+    <span class="dot active" onclick="showImage(this.closest('.project-card'), 0)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 1)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 2)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 3)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 4)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 5)"></span>
+  </div>
+
+  <!-- Beskrivning -->
+  <p data-sv="En e-handel sida där fokus låg på responsiv design, semantisk HTML, CSS och javascript." 
+     data-en="An e-commerce website focused on responsive design, semantic HTML, CSS and javascript.">
+     En e-handel sida där fokus låg på responsiv design, semantisk HTML, CSS och javascript.
+  </p>
+
+  <!-- Se kod-knapp -->
+  <a href="https://github.com/IsabelleBan/FreakyFashion.git" target="_blank" 
+     data-sv="Se kod" data-en="View Code">
+     Se kod
+  </a>
+</div>
+
 
     <div class="project-card">
       <h3 data-sv="Retrendo - Köp & Sälj Plattform" data-en="Retrendo - Buy & Sell Platform">
@@ -70,20 +119,44 @@
          data-sv="Se kod" data-en="View Code">Se kod</a>
     </div>
 
-    <div class="project-card">
-      <h3 data-sv="Freaky Fashion 2 - Angular & TypeScript" data-en="Freaky Fashion 2 - Angular & TypeScript">
-        Freaky Fashion 2 - Angular & TypeScript
-      </h3>
-      <video src="videos/freaky.mp4" controls width="100%"></video>
-      <p data-sv="En modern version av Freaky Fashion byggd med Angular och TypeScript. Här låg fokus på komponentbaserad utveckling och dynamisk datahantering från backend." 
-         data-en="A modern version of Freaky Fashion built with Angular and TypeScript. Focus was on component-based development and dynamic data handling from the backend.">
-         En modern version av Freaky Fashion byggd med Angular och TypeScript. Här låg fokus på komponentbaserad utveckling och dynamisk datahantering från backend.
-      </p>
-      <a href="https://github.com/IsabelleBan/Javascript3-FreakyFashion.git" target="_blank" 
-         data-sv="Se kod" data-en="View Code">Se kod</a>
-    </div>
+<div class="project-card">
+  <h3 data-sv="Freaky Fashion - Responsiv E-handel" 
+      data-en="Freaky Fashion - Responsive E-commerce">
+    Freaky Fashion - Responsiv E-handel
+  </h3>
 
+  <!-- Bildgalleri -->
+  <div class="image-gallery">
+    <img src="img/f1.png" alt="Freaky Fashion Startsida" class="project-image active">
+    <img src="img/f2.png" alt="Freaky Fashion Produkter" class="project-image">
+    <img src="img/f3.png" alt="Freaky Fashion Mobil" class="project-image">
+    <img src="img/f4.png" alt="Freaky Fashion Mobil" class="project-image">
+    <img src="img/f6.png" alt="Freaky Fashion Mobil" class="project-image">
+    <img src="img/f7.png" alt="Freaky Fashion Mobil" class="project-image small-image">
   </div>
+
+  <!-- Dots för att byta bild -->
+  <div class="image-dots">
+    <span class="dot active" onclick="showImage(this.closest('.project-card'), 0)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 1)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 2)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 3)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 4)"></span>
+    <span class="dot" onclick="showImage(this.closest('.project-card'), 5)"></span>
+  </div>
+
+  <!-- Beskrivning -->
+  <p data-sv="En uppdaterad variant av FreakyFashion där Angular och TypeScript används för interaktiva formulär, med SQL-databas för lagring och hantering av produktdata." 
+     data-en="An updated version of FreakyFashion where Angular and TypeScript are used for interactive forms, with an SQL database for storing and managing product data.">
+     En uppdaterad variant av FreakyFashion där Angular och TypeScript används för interaktiva formulär, med SQL-databas för lagring och hantering av produktdata.
+  </p>
+
+  <!-- Se kod-knapp -->
+  <a href="https://github.com/IsabelleBan/Javascript3-FreakyFashion.git" target="_blank" 
+     data-sv="Se kod" data-en="View Code">
+     Se kod
+  </a>
+</div>
 </section>
 
 <section id="skills">
@@ -128,32 +201,108 @@
     <p></p>&copy; 2025 Isabelle Banjac.</p>
   </footer>
 
-  <script>
+<script>
+    // Your existing language toggle code
     let currentLanguage = 'sv';
 
     function toggleLanguage() {
-      const button = document.querySelector('.language-toggle');
-      const elementsWithTranslation = document.querySelectorAll('[data-sv][data-en]');
-      
-      if (currentLanguage === 'sv') {
-        // Switch to English
-        currentLanguage = 'en';
-        button.textContent = 'SV';
+        const button = document.querySelectorAll('.language-toggle'); // Updated to work with multiple buttons
+        const elementsWithTranslation = document.querySelectorAll('[data-sv][data-en]');
         
-        elementsWithTranslation.forEach(element => {
-          element.textContent = element.getAttribute('data-en');
-        });
-      } else {
-        // Switch to Swedish
-        currentLanguage = 'sv';
-        button.textContent = 'EN';
-        
-        elementsWithTranslation.forEach(element => {
-          element.textContent = element.getAttribute('data-sv');
-        });
-      }
+        if (currentLanguage === 'sv') {
+            currentLanguage = 'en';
+            button.forEach(btn => btn.textContent = 'SV'); // Updated to handle both desktop and mobile buttons
+            
+            elementsWithTranslation.forEach(element => {
+                element.textContent = element.getAttribute('data-en');
+            });
+        } else {
+            currentLanguage = 'sv';
+            button.forEach(btn => btn.textContent = 'EN'); // Updated to handle both desktop and mobile buttons
+            
+            elementsWithTranslation.forEach(element => {
+                element.textContent = element.getAttribute('data-sv');
+            });
+        }
     }
-  </script>
+
+    // Add the new burger menu functions here
+    function toggleMobileMenu() {
+        const burger = document.querySelector('.burger-menu');
+        const overlay = document.querySelector('.nav-overlay');
+        
+        burger.classList.toggle('active');
+        overlay.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (overlay.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    function closeMobileMenu() {
+        const burger = document.querySelector('.burger-menu');
+        const overlay = document.querySelector('.nav-overlay');
+        
+        burger.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const burger = document.querySelector('.burger-menu');
+        const overlay = document.querySelector('.nav-overlay');
+        
+        if (burger && overlay && !burger.contains(e.target) && !overlay.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+
+    let currentImageIndex = 0;
+
+function showImage(card, index) {
+  // Hämta bara bilderna i det kortet
+  const images = card.querySelectorAll('.project-image');
+  const dots = card.querySelectorAll('.dot');
+
+  images.forEach((img, i) => {
+    img.classList.toggle('active', i === index);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+}
+
+// Optional: Auto-rotate through images
+function autoRotateImages() {
+    const images = document.querySelectorAll('.project-image');
+    if (images.length > 1) {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showImage(currentImageIndex);
+    }
+}
+
+// Optional: Start auto-rotation (uncomment if you want this)
+// setInterval(autoRotateImages, 4000); // Changes image every 4 seconds
+
+// Optional: Add keyboard navigation
+document.addEventListener('keydown', function(e) {
+    const images = document.querySelectorAll('.project-image');
+    if (e.key === 'ArrowLeft' && images.length > 1) {
+        currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : images.length - 1;
+        showImage(currentImageIndex);
+    } else if (e.key === 'ArrowRight' && images.length > 1) {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showImage(currentImageIndex);
+    }
+});
+
+</script>
+
 </body>
 </html>
 
