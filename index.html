@@ -108,22 +108,54 @@
     50% { opacity: 0.3; }
   }
 
+  /* LANG SWITCHER */
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--border);
+  }
+
+  .lang-btn {
+    padding: 4px 10px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .lang-btn.active {
+    background: var(--text);
+    color: var(--white);
+  }
+
+  .lang-btn:hover:not(.active) { opacity: 0.6; }
+
+  /* TECH BAR */
   .tech-bar {
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 24px 56px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: center;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--muted);
-  width: 100%;
-}
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 56px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    width: 100%;
+  }
 
   /* HERO */
   .hero {
@@ -145,17 +177,6 @@
     color: var(--muted);
     letter-spacing: 0.08em;
     writing-mode: vertical-rl;
-  }
-
-  .hero-intro {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    opacity: 0;
-    animation: up 1s ease forwards 0.1s;
   }
 
   h1 {
@@ -188,21 +209,6 @@
     line-height: 1.5;
   }
 
-  .hero-tags {
-    display: flex;
-    gap: 8px;
-  }
-
-  .hero-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 6px 14px;
-  }
-
   @keyframes up {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: none; }
@@ -231,7 +237,6 @@
     font-weight: 600;
   }
 
-  /* PROJECT CARD */
   .project {
     border-bottom: 1px solid #ddd;
     padding: 80px 0;
@@ -265,13 +270,13 @@
   }
 
   .p-tag {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  padding: 4px 12px;
-  background: var(--text);
-  color: white;
-  border: 1px solid var(--text);
-}
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 4px 12px;
+    background: var(--text);
+    color: white;
+    border: 1px solid var(--text);
+  }
 
   .p-img {
     position: relative;
@@ -289,26 +294,24 @@
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .project:hover .p-img img {
-    transform: scale(1.03);
-  }
+  .project:hover .p-img img { transform: scale(1.03); }
 
   .p-link {
-  display: inline-flex;
-  align-items: center;
-  margin-top: 20px;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--text);
-  border-bottom: 1px solid var(--text);
-  padding-bottom: 2px;
-  transition: opacity 0.2s;
-}
+    display: inline-flex;
+    align-items: center;
+    margin-top: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text);
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
 
-.p-link:hover { opacity: 0.4; }
+  .p-link:hover { opacity: 0.4; }
 
   /* ABOUT */
   .about {
@@ -423,7 +426,6 @@
     color: var(--muted);
   }
 
-  /* REVEAL */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -431,13 +433,12 @@
   }
   .reveal.on { opacity: 1; transform: none; }
 
-  /* RESPONSIVE */
   @media (max-width: 960px) {
     body { cursor: auto; }
     .cursor { display: none; }
     nav { padding: 20px 24px; }
     .nav-right a:not(.nav-avail) { display: none; }
-    .tech-bar { padding: 10px 24px; font-size: 10px; gap: 14px; top: 65px; }
+    .tech-bar { display: none; }
     h1 { font-size: clamp(44px, 10vw, 72px); }
     .hero { padding: 160px 24px 60px; min-height: auto; }
     .hero-side-text { display: none; }
@@ -449,11 +450,6 @@
     .contact-section { padding: 80px 24px 100px; grid-template-columns: 1fr; gap: 48px; }
     footer { padding: 24px; flex-direction: column; gap: 6px; }
   }
-
-  @media (max-width: 960px) {
-  .tech-bar { display: none; }
-}
-
 </style>
 </head>
 <body>
@@ -463,22 +459,22 @@
 <nav id="nav">
   <a href="#" class="nav-name">Isabelle Banjac</a>
   <div class="nav-right">
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <span class="nav-avail"><span class="avail-dot"></span> Available</span>
+    <a href="#work" data-en="Work" data-sv="Arbete">Work</a>
+    <a href="#about" data-en="About" data-sv="Om mig">About</a>
+    <a href="#contact" data-en="Contact" data-sv="Kontakt">Contact</a>
+    <span class="nav-avail"><span class="avail-dot"></span> <span data-en="Available" data-sv="Tillgänglig">Available</span></span>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('sv')">SV</button>
+    </div>
   </div>
 </nav>
 
 <div class="hero">
   <div class="hero-side-text">Gothenburg · Sweden · 2026</div>
-  
   <h1>Fullstack<br>developer <em>&</em><br>builder.</h1>
   <div class="hero-bottom">
-    <p class="hero-desc">Building platforms, e-commerce and data-driven applications. CTO and product owner at Method & Matter Labs.</p>
-    <div class="hero-tags">
-      
-    </div>
+    <p class="hero-desc" data-en="Building platforms, e-commerce and data-driven applications. CTO and product owner at Method & Matter Labs." data-sv="Bygger plattformar, e-handel och datadrivna applikationer. CTO och produktägare på Method & Matter Labs.">Building platforms, e-commerce and data-driven applications. CTO and product owner at Method & Matter Labs.</p>
   </div>
 </div>
 
@@ -500,29 +496,33 @@
 
 <div class="work" id="work">
   <div class="work-header reveal">
-    <span class="section-label">Selected work</span>
+    <span class="section-label" data-en="Selected work" data-sv="Utvalda projekt">Selected work</span>
     <span class="section-label">09 projects</span>
   </div>
 
   <div class="project reveal">
     <div class="p-num">01</div>
     <div class="p-title">Method & Matter Labs</div>
-    <p class="p-desc">Full product architecture of a multi-tenant SaaS platform for organisational intelligence  — a concept in early development. Database design with Row Level Security, assessment system and dashboard visualization.</p>
+    <p class="p-desc" data-en="Full product architecture of a multi-tenant SaaS platform for organisational intelligence — a concept in early development. Database design with Row Level Security, assessment system and dashboard visualization." data-sv="Fullständig produktarkitektur för en multi-tenant SaaS-plattform för organisatorisk intelligens — ett koncept i tidig utveckling. Databasdesign med Row Level Security, självskattningssystem och dashboardvisualisering.">Full product architecture of a multi-tenant SaaS platform for organisational intelligence — a concept in early development. Database design with Row Level Security, assessment system and dashboard visualization.</p>
     <div class="p-tags">
-      <span class="p-tag hi">React</span>
-      <span class="p-tag hi">TypeScript</span>
-      <span class="p-tag hi">Supabase</span>
+      <span class="p-tag">React</span>
+      <span class="p-tag">TypeScript</span>
+      <span class="p-tag">Supabase</span>
       <span class="p-tag">PostgreSQL</span>
     </div>
-    <span class="p-link" style="cursor:default; border-bottom: 1px solid #ccc; color:#999;">Available on request</span>
+    <span class="p-link" style="cursor:default; border-bottom: 1px solid #ccc; color:#999;" data-en="Available on request" data-sv="Tillgänglig på begäran">Available on request</span>
     <div class="p-img"><img src="img/mml_dashboard.png" alt="MML"></div>
   </div>
 
-<div class="project reveal">
+  <div class="project reveal">
     <div class="p-num">02</div>
     <div class="p-title">Hanna Instruments Sweden</div>
-    <p class="p-desc">Scientific instruments e-commerce. Product data via API integration and SEO architecture.</p>
-    <div class="p-tags"><span class="p-tag hi">Shopify</span><span class="p-tag">E-commerce</span><span class="p-tag">API Integration</span></div>
+    <p class="p-desc" data-en="Scientific instruments e-commerce. Product data via API integration and SEO architecture." data-sv="E-handel för vetenskapliga instrument. Produktdata via API-integration och SEO-arkitektur.">Scientific instruments e-commerce. Product data via API integration and SEO architecture.</p>
+    <div class="p-tags">
+      <span class="p-tag">Shopify</span>
+      <span class="p-tag">E-commerce</span>
+      <span class="p-tag">API Integration</span>
+    </div>
     <a href="https://hannainst.se/sv-se" target="_blank" class="p-link">hannainst.se ↗</a>
     <div class="p-img"><img src="img/hanna2.png" alt="Hanna"></div>
   </div>
@@ -530,8 +530,11 @@
   <div class="project reveal">
     <div class="p-num">03</div>
     <div class="p-title">Innesvingen</div>
-    <p class="p-desc">Golf equipment store with custom discovery experience and brand filtering.</p>
-    <div class="p-tags"><span class="p-tag hi">Shopify</span><span class="p-tag hi">E-commerce</span></div>
+    <p class="p-desc" data-en="Golf equipment store with custom discovery experience and brand filtering." data-sv="Golfbutik med anpassad produktupptäckt och varumärkesfiltrering.">Golf equipment store with custom discovery experience and brand filtering.</p>
+    <div class="p-tags">
+      <span class="p-tag">Shopify</span>
+      <span class="p-tag">E-commerce</span>
+    </div>
     <a href="https://innesvingen.se" target="_blank" class="p-link">innesvingen.se ↗</a>
     <div class="p-img"><img src="img/innesvingen.png" alt="Innesvingen"></div>
   </div>
@@ -539,9 +542,9 @@
   <div class="project reveal">
     <div class="p-num">04</div>
     <div class="p-title">Priét</div>
-    <p class="p-desc">Luxury jewellery e-commerce for engagement and wedding rings. Bilingual site with a refined brand identity.</p>
+    <p class="p-desc" data-en="Luxury jewellery e-commerce for engagement and wedding rings. Bilingual site with a refined brand identity." data-sv="Lyxig smyckesbutik för förlovnings- och vigselringar. Tvåspråkig sajt med förfinad varumärkesidentitet.">Luxury jewellery e-commerce for engagement and wedding rings. Bilingual site with a refined brand identity.</p>
     <div class="p-tags">
-      <span class="p-tag hi">Shopify</span>
+      <span class="p-tag">Shopify</span>
       <span class="p-tag">E-commerce</span>
       <span class="p-tag">API integration</span>
     </div>
@@ -551,44 +554,56 @@
   <div class="project reveal">
     <div class="p-num">05</div>
     <div class="p-title">Norrsken</div>
-    <p class="p-desc">Scandinavian women's outerwear brand.</p>
-    <div class="p-tags"><span class="p-tag hi">Shopify</span><span class="p-tag hi">E-commerce</span></div>
+    <p class="p-desc" data-en="Scandinavian women's outerwear brand. Cinematic hero and seasonal collection launches." data-sv="Skandinaviskt damytterkläder-varumärke. Filmisk hero och säsongsbaserade kollektionslansering.">Scandinavian women's outerwear brand. Cinematic hero and seasonal collection launches.</p>
+    <div class="p-tags">
+      <span class="p-tag">Shopify</span>
+      <span class="p-tag">E-commerce</span>
+    </div>
     <div class="p-img"><img src="img/norrsken.png" alt="Norrsken"></div>
   </div>
 
   <div class="project reveal">
     <div class="p-num">06</div>
     <div class="p-title">Five Seasons</div>
-    <p class="p-desc">Outdoor clothing e-commerce for men, women and children. Seasonal campaign focus.</p>
-    <div class="p-tags"><span class="p-tag hi">Shopify</span><span class="p-tag hi">E-commerce</span></div>
+    <p class="p-desc" data-en="Outdoor clothing e-commerce for men, women and children. Seasonal campaign focus." data-sv="E-handel för friluftskläder till herr, dam och barn. Fokus på säsongskampanjer.">Outdoor clothing e-commerce for men, women and children. Seasonal campaign focus.</p>
+    <div class="p-tags">
+      <span class="p-tag">Shopify</span>
+      <span class="p-tag">E-commerce</span>
+    </div>
     <div class="p-img"><img src="img/fiveseasons.png" alt="Five Seasons"></div>
   </div>
 
   <div class="project reveal">
-  <div class="p-num">07</div>
-  <div class="p-title">MHK Foods</div>
-  <p class="p-desc">WordPress e-commerce rebuild for a Swedish food wholesaler. Contributed to homepage and product page development.</p>
-  <div class="p-tags">
-    <span class="p-tag hi">WordPress</span>
-    <span class="p-tag">E-commerce</span>
-    <span class="p-tag">WooCommerce</span>
+    <div class="p-num">07</div>
+    <div class="p-title">MHK Foods</div>
+    <p class="p-desc" data-en="WordPress e-commerce rebuild for a Swedish food wholesaler. Contributed to homepage and product page development." data-sv="WordPress e-handelsombyggnad för en svensk livsmedelsgrossist. Bidrog till startsida och produktsideutveckling.">WordPress e-commerce rebuild for a Swedish food wholesaler. Contributed to homepage and product page development.</p>
+    <div class="p-tags">
+      <span class="p-tag">WordPress</span>
+      <span class="p-tag">E-commerce</span>
+      <span class="p-tag">WooCommerce</span>
+    </div>
+    <div class="p-img"><img src="img/mhk.png" alt="MHK Foods"></div>
   </div>
-  <div class="p-img"><img src="img/mhk.png" alt="MHK Foods"></div>
-</div>
 
   <div class="project reveal">
     <div class="p-num">08</div>
     <div class="p-title">Frontic</div>
-    <p class="p-desc">Service company website for grounds maintenance. Product catalogue and contact flow.</p>
-    <div class="p-tags"><span class="p-tag hi">Shopify</span></div>
+    <p class="p-desc" data-en="Service company website for grounds maintenance. Product catalogue and contact flow." data-sv="Företagswebbplats för fastighetsskötsel. Produktkatalog och kontaktflöde.">Service company website for grounds maintenance. Product catalogue and contact flow.</p>
+    <div class="p-tags">
+      <span class="p-tag">Shopify</span>
+    </div>
     <div class="p-img"><img src="img/frontic.png" alt="Frontic"></div>
   </div>
 
   <div class="project reveal">
     <div class="p-num">09</div>
     <div class="p-title">Paria Kadir</div>
-    <p class="p-desc">Personal website for music producer. Visual identity, layout and custom architecture.</p>
-    <div class="p-tags"><span class="p-tag hi">HTML</span><span class="p-tag hi">CSS</span><span class="p-tag hi">JavaScript</span></div>
+    <p class="p-desc" data-en="Personal website for music producer. Visual identity, layout and custom architecture." data-sv="Personlig webbplats för musikproducent. Visuell identitet, layout och anpassad arkitektur.">Personal website for music producer. Visual identity, layout and custom architecture.</p>
+    <div class="p-tags">
+      <span class="p-tag">HTML</span>
+      <span class="p-tag">CSS</span>
+      <span class="p-tag">JavaScript</span>
+    </div>
     <a href="https://pariakadir.com" target="_blank" class="p-link">pariakadir.com ↗</a>
     <div class="p-img"><img src="img/paria1.png" alt="Paria"></div>
   </div>
@@ -597,17 +612,17 @@
 <div class="about" id="about">
   <div class="about-inner">
     <div class="about-left reveal">
-      <span class="section-label" style="display:block; margin-bottom:20px;">About</span>
-      <h2>Developer.<br>Builder.<br><em>Problem solver.</em></h2>
-      <p>I'm a fullstack developer based in Gothenburg, graduating from EC Utbildning in June 2026. Currently CTO and product owner at Method & Matter Labs, a concept in early development. Background in logistics — I think in systems, processes and traceability.</p>
+      <span class="section-label" style="display:block; margin-bottom:20px;" data-en="About" data-sv="Om mig">About</span>
+      <h2 data-en="Developer.<br>Builder.<br><em>Problem solver.</em>" data-sv="Utvecklare.<br>Byggare.<br><em>Problemlösare.</em>">Developer.<br>Builder.<br><em>Problem solver.</em></h2>
+      <p data-en="I'm a fullstack developer based in Gothenburg, graduating from EC Utbildning in June 2026. Currently CTO and product owner at Method & Matter Labs, a concept in early development. Background in logistics — I think in systems, processes and traceability." data-sv="Jag är en fullstackutvecklare baserad i Göteborg och tar examen från EC Utbildning i juni 2026. CTO och produktägare på Method & Matter Labs, ett koncept i tidig utveckling. Bakgrund inom logistik — jag tänker i system, processer och spårbarhet.">I'm a fullstack developer based in Gothenburg, graduating from EC Utbildning in June 2026. Currently CTO and product owner at Method & Matter Labs, a concept in early development. Background in logistics — I think in systems, processes and traceability.</p>
     </div>
     <div class="about-right reveal">
-      <div class="info-row"><span>Location</span><strong>Gothenburg, Sweden</strong></div>
-      <div class="info-row"><span>Education</span><strong>EC Utbildning — Jun 2026</strong></div>
-      <div class="info-row"><span>Current role</span><strong>CTO @ Method & Matter Labs</strong></div>
-      <div class="info-row"><span>Experience</span><strong>Freelance · LIA · Startup</strong></div>
-      <div class="info-row"><span>Languages</span><strong>Swedish · English</strong></div>
-      <div class="info-row"><span>Certified</span><strong>Shopify Development</strong></div>
+      <div class="info-row"><span data-en="Location" data-sv="Plats">Location</span><strong>Gothenburg, Sweden</strong></div>
+      <div class="info-row"><span data-en="Education" data-sv="Utbildning">Education</span><strong>EC Utbildning — Jun 2026</strong></div>
+      <div class="info-row"><span data-en="Current role" data-sv="Nuvarande roll">Current role</span><strong>CTO @ Method & Matter Labs</strong></div>
+      <div class="info-row"><span data-en="Experience" data-sv="Erfarenhet">Experience</span><strong data-en="Freelance · LIA · Startup" data-sv="Frilans · LIA · Startup">Freelance · LIA · Startup</strong></div>
+      <div class="info-row"><span data-en="Languages" data-sv="Språk">Languages</span><strong data-en="Swedish · English" data-sv="Svenska · Engelska">Swedish · English</strong></div>
+      <div class="info-row"><span data-en="Certified" data-sv="Certifierad">Certified</span><strong data-en="Shopify Development" data-sv="Shopify-utveckling">Shopify Development</strong></div>
       <div style="margin-top: 40px;">
         <span class="skill">React</span>
         <span class="skill">TypeScript</span>
@@ -628,12 +643,12 @@
 <div id="contact">
   <div class="contact-section">
     <div class="reveal">
-      <span class="section-label" style="display:block; margin-bottom:32px;">Contact</span>
-      <h2>Let's work<br><em>together.</em></h2>
+      <span class="section-label" style="display:block; margin-bottom:32px;" data-en="Contact" data-sv="Kontakt">Contact</span>
+      <h2 data-en="Let's work<br><em>together.</em>" data-sv="Låt oss jobba<br><em>tillsammans.</em>">Let's work<br><em>together.</em></h2>
     </div>
     <div class="contact-links reveal">
       <a href="mailto:banjacisabelle@gmail.com" class="c-link">
-        <span class="c-link-label">Email</span>
+        <span class="c-link-label" data-en="Email" data-sv="E-post">Email</span>
         <span class="c-link-sub">banjacisabelle@gmail.com</span>
       </a>
       <a href="https://www.linkedin.com/in/isabelle-banjac" target="_blank" class="c-link">
@@ -654,6 +669,7 @@
 </footer>
 
 <script>
+  // CURSOR
   const cur = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
     cur.style.left = e.clientX + 'px';
@@ -664,15 +680,35 @@
     el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
   });
 
+  // NAV SCROLL
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   });
 
+  // REVEAL
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // LANGUAGE SWITCHER
+  let currentLang = 'en';
+
+  function setLang(lang) {
+    currentLang = lang;
+
+    // Update buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+    });
+
+    // Update all elements with data-en / data-sv
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text) el.innerHTML = text;
+    });
+  }
 </script>
 </body>
 </html>
