@@ -433,6 +433,57 @@
   }
   .reveal.on { opacity: 1; transform: none; }
 
+  .hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 22px;
+  height: 1px;
+  background: var(--text);
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--white);
+  z-index: 99;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 960px) {
+  .hamburger { display: flex; }
+  .nav-avail { display: none; }
+  .lang-switcher { display: none; }
+}
+
   @media (max-width: 960px) {
     body { cursor: auto; }
     .cursor { display: none; }
@@ -467,8 +518,17 @@
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('sv')">SV</button>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#work" onclick="toggleMenu()">Work</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
 
 <div class="hero">
   <div class="hero-side-text">Gothenburg · Sweden · 2026</div>
@@ -711,6 +771,12 @@
       if (text) el.innerHTML = text;
     });
   }
+
+  function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
 </script>
 </body>
 </html>
