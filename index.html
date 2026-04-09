@@ -1,309 +1,678 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Isabelle Banjac | Frontend Developer</title>
-  <link rel="stylesheet" href="style.css">
-  </head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isabelle Banjac</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --white: #ffffff;
+    --text: #000000;
+    --muted: #333333;
+    --border: #222222;
+    --accent: #000000;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'EB Garamond', serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--text);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s ease, height 0.25s ease;
+  }
+  .cursor.hover {
+    width: 44px; height: 44px;
+    background: transparent;
+    border: 1px solid var(--text);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 56px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .nav-right a {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s;
+  }
+
+  .nav-right a:hover { opacity: 0.5; }
+
+  .nav-avail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  .avail-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #00aa00;
+    animation: blink 2s ease infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .tech-bar {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 24px 56px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  width: 100%;
+}
+
+  /* HERO */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 56px 50px;
+    position: relative;
+  }
+
+  .hero-side-text {
+    position: absolute;
+    top: 50%;
+    right: 56px;
+    transform: translateY(-50%);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    writing-mode: vertical-rl;
+  }
+
+  .hero-intro {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    opacity: 0;
+    animation: up 1s ease forwards 0.1s;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(60px, 8.5vw, 115px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    max-width: 900px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: up 1s ease forwards 0.2s;
+  }
+
+  h1 em { font-style: italic; color: #555; }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    opacity: 0;
+    animation: up 1s ease forwards 0.4s;
+  }
+
+  .hero-desc {
+    font-size: 20px;
+    color: var(--muted);
+    max-width: 450px;
+    line-height: 1.5;
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 8px;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+  }
+
+  @keyframes up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* WORK */
+  .work {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 100px 56px;
+  }
+
+  .work-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--text);
+    margin-bottom: 0;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* PROJECT CARD */
+  .project {
+    border-bottom: 1px solid #ddd;
+    padding: 80px 0;
+  }
+
+  .p-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .p-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 400;
+    color: var(--text);
+    margin: 10px 0 20px;
+  }
+
+  .p-desc {
+    font-size: 19px;
+    color: var(--muted);
+    max-width: 700px;
+    margin-bottom: 30px;
+  }
+
+  .p-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .p-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 4px 12px;
+  background: var(--text);
+  color: white;
+  border: 1px solid var(--text);
+}
+
+  .p-img {
+    position: relative;
+    margin-top: 48px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+
+  .p-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .project:hover .p-img img {
+    transform: scale(1.03);
+  }
+
+  .p-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text);
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+
+.p-link:hover { opacity: 0.4; }
+
+  /* ABOUT */
+  .about {
+    background: #fcfcfc;
+    border-top: 1px solid var(--border);
+    padding: 120px 56px;
+  }
+
+  .about-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+  }
+
+  .about-left h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.1;
+    margin-bottom: 30px;
+  }
+
+  .about-left h2 em { font-style: italic; color: #555; }
+
+  .about-left p {
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+  }
+
+  .info-row:first-child { border-top: 1px solid #ddd; }
+
+  .skill {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    padding: 6px 14px;
+    border: 1px solid var(--text);
+    margin: 4px;
+    display: inline-block;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 120px 56px 160px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .contact-section h2 em { font-style: italic; color: #555; }
+
+  .contact-links { display: flex; flex-direction: column; }
+
+  .c-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid #ddd;
+    text-decoration: none;
+    color: var(--text);
+    transition: padding-left 0.3s ease;
+  }
+
+  .c-link:first-child { border-top: 1px solid #ddd; }
+  .c-link:hover { padding-left: 10px; }
+
+  .c-link-label {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  .c-link-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  footer {
+    padding: 28px 56px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    background: var(--white);
+  }
+
+  footer span {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+  .reveal.on { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    body { cursor: auto; }
+    .cursor { display: none; }
+    nav { padding: 20px 24px; }
+    .nav-right a:not(.nav-avail) { display: none; }
+    .tech-bar { padding: 10px 24px; font-size: 10px; gap: 14px; top: 65px; }
+    h1 { font-size: clamp(44px, 10vw, 72px); }
+    .hero { padding: 160px 24px 60px; min-height: auto; }
+    .hero-side-text { display: none; }
+    .hero-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
+    .work { padding: 60px 24px; }
+    .about { padding: 80px 24px; }
+    .about-inner { grid-template-columns: 1fr; gap: 48px; }
+    .project { padding: 48px 0; }
+    .contact-section { padding: 80px 24px 100px; grid-template-columns: 1fr; gap: 48px; }
+    footer { padding: 24px; flex-direction: column; gap: 6px; }
+  }
+
+  @media (max-width: 960px) {
+  .tech-bar { display: none; }
+}
+
+</style>
+</head>
 <body>
-<header>
-  <div class="header-left">
-    <h1>Portfolio</h1>
-    <h2>Isabelle Banjac</h2>
-    <p>Frontend Developer Student</p>
+
+<div class="cursor" id="cursor"></div>
+
+<nav id="nav">
+  <a href="#" class="nav-name">Isabelle Banjac</a>
+  <div class="nav-right">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <span class="nav-avail"><span class="avail-dot"></span> Available</span>
   </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-side-text">Gothenburg · Sweden · 2026</div>
   
-  <div class="header-right">
-    <!-- Regular navigation for desktop -->
-    <nav>
-      <ul>
-        <li><a href="#about" data-sv="Om mig" data-en="About Me">Om mig</a></li>
-        <li><a href="#projects" data-sv="Projekt" data-en="Projects">Projekt</a></li>
-        <li><a href="#skills" data-sv="Skills" data-en="Skills">Skills</a></li>
-        <li><a href="#additional-skills" data-sv="Additional skills" data-en="Additional Skills">Additional skills</a></li>
-        <li><a href="#contact" data-sv="Kontakt" data-en="Contact">Kontakt</a></li>
-      </ul>
-    </nav>
-    <button class="language-toggle" onclick="toggleLanguage()">EN</button>
-    
-    <!-- Burger menu for mobile -->
-    <div class="burger-menu" onclick="toggleMobileMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
+  <h1>Fullstack<br>developer <em>&</em><br>builder.</h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">Building platforms, e-commerce and data-driven applications. CTO and product owner at Method & Matter Labs.</p>
+    <div class="hero-tags">
+      
     </div>
   </div>
-</header>
-
-<!-- Mobile navigation overlay -->
-<div class="nav-overlay" id="navOverlay">
-  <nav>
-    <ul>
-      <li><a href="#about" data-sv="Om mig" data-en="About Me" onclick="closeMobileMenu()">Om mig</a></li>
-      <li><a href="#projects" data-sv="Projekt" data-en="Projects" onclick="closeMobileMenu()">Projekt</a></li>
-      <li><a href="#skills" data-sv="Skills" data-en="Skills" onclick="closeMobileMenu()">Skills</a></li>
-      <li><a href="#additional-skills" data-sv="Additional skills" data-en="Additional Skills" onclick="closeMobileMenu()">Additional skills</a></li>
-      <li><a href="#contact" data-sv="Kontakt" data-en="Contact" onclick="closeMobileMenu()">Kontakt</a></li>
-    </ul>
-  </nav>
-  <button class="language-toggle" onclick="toggleLanguage()">EN</button>
 </div>
 
-<section id="about">
-  <img src="img/Bella.jpg" alt="Porträtt" class="profile-pic">
-  <div class="about-content">
-    <h2 data-sv="Om mig" data-en="About Me">Om mig</h2>
-    <p data-sv="Jag är en LIA-sökande frontend-utvecklarstudent som älskar att omvandla idéer till digitala upplevelser. Design, struktur och användarvänlighet är min passion, och jag bygger moderna, responsiva webbplatser som både ser fantastiska ut och fungerar sömlöst på alla enheter. Med erfarenhet av backend kan jag även skapa lösningar som fungerar lika bra bakom kulisserna som på skärmen."
-       data-en="I am a frontend development student seeking an internship (LIA) with a passion for turning ideas into engaging digital experiences. I love crafting modern, responsive websites that not only look amazing but also work seamlessly on any device. With backend experience, I can ensure my solutions run just as smoothly behind the scenes as they do on the screen.">
-       Jag är en LIA-sökande frontend-utvecklarstudent som älskar att omvandla idéer till digitala upplevelser. Design, struktur och användarvänlighet är min passion, och jag bygger moderna, responsiva webbplatser som både ser fantastiska ut och fungerar sömlöst på alla enheter. Med erfarenhet av backend kan jag även skapa lösningar som fungerar lika bra bakom kulisserna som på skärmen.
-    </p>
-
-  </div>
-</section>
-
-  <section id="projects">
-  <h2 data-sv="Projekt" data-en="Projects">Projekt</h2>
-  <div class="project-grid">
-
-<div class="project-card">
-  <h3 data-sv="Freaky Fashion - Responsiv E-handel" 
-      data-en="Freaky Fashion - Responsive E-commerce">
-    Freaky Fashion - Responsiv E-handel
-  </h3>
-
-  <!-- Bildgalleri -->
-  <div class="image-gallery">
-    <img src="img/freaky1.png" alt="Freaky Fashion Startsida" class="project-image active">
-    <img src="img/freaky2.png" alt="Freaky Fashion Produkter" class="project-image">
-    <img src="img/freaky5.png" alt="Freaky Fashion Mobil" class="project-image">
-    <img src="img/freaky4.png" alt="Freaky Fashion Mobil" class="project-image">
-    <img src="img/freaky6.png" alt="Freaky Fashion Mobil" class="project-image">
-    <img src="img/freaky7.png" alt="Freaky Fashion Mobil" class="project-image small-image">
-  </div>
-
-  <!-- Dots för att byta bild -->
-  <div class="image-dots">
-    <span class="dot active" onclick="showImage(this.closest('.project-card'), 0)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 1)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 2)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 3)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 4)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 5)"></span>
-  </div>
-
-  <!-- Beskrivning -->
-  <p data-sv="En e-handel sida där fokus låg på responsiv design, semantisk HTML, CSS och javascript." 
-     data-en="An e-commerce website focused on responsive design, semantic HTML, CSS and javascript.">
-     En e-handel sida där fokus låg på responsiv design, semantisk HTML, CSS och javascript.
-  </p>
-
-  <!-- Se kod-knapp -->
-  <a href="https://github.com/IsabelleBan/FreakyFashion.git" target="_blank" 
-     data-sv="Se kod" data-en="View Code">
-     Se kod
-  </a>
+<div class="tech-bar">
+  <span>React</span><span>·</span>
+  <span>TypeScript</span><span>·</span>
+  <span>JavaScript</span><span>·</span>
+  <span>Supabase</span><span>·</span>
+  <span>Node.js</span><span>·</span>
+  <span>PostgreSQL</span><span>·</span>
+  <span>Shopify</span><span>·</span>
+  <span>WordPress</span><span>·</span>
+  <span>Angular</span><span>·</span>
+  <span>Git</span><span>·</span>
+  <span>UX / UI</span><span>·</span>
+  <span>C# / OOP</span><span>·</span>
+  <span>REST APIs</span>
 </div>
 
+<div class="work" id="work">
+  <div class="work-header reveal">
+    <span class="section-label">Selected work</span>
+    <span class="section-label">09 projects</span>
+  </div>
 
-    <div class="project-card">
-      <h3 data-sv="Retrendo - Köp & Sälj Plattform" data-en="Retrendo - Buy & Sell Platform">
-        Retrendo - Köp & Sälj Plattform
-      </h3>
-      <video src="videos/retrendo.mp4" controls width="100%"></video>
-      <p data-sv="Gruppprojekt där vi byggde en plattform för att köpa och sälja produkter. Funktioner inkluderar sökning, filtrering och användarskapade inlägg." 
-         data-en="Group project where we built a platform to buy and sell products. Features include search, filtering, and user-generated posts.">
-         Gruppprojekt där vi byggde en plattform för att köpa och sälja produkter. Funktioner inkluderar sökning, filtrering och användarskapade inlägg.
-      </p>
-      <a href="https://github.com/IsabelleBan/retrendo.git" target="_blank" 
-         data-sv="Se kod" data-en="View Code">Se kod</a>
+  <div class="project reveal">
+    <div class="p-num">01</div>
+    <div class="p-title">Method & Matter Labs</div>
+    <p class="p-desc">Full product architecture of a multi-tenant SaaS platform for organisational intelligence  — a concept in early development. Database design with Row Level Security, assessment system and dashboard visualization.</p>
+    <div class="p-tags">
+      <span class="p-tag hi">React</span>
+      <span class="p-tag hi">TypeScript</span>
+      <span class="p-tag hi">Supabase</span>
+      <span class="p-tag">PostgreSQL</span>
     </div>
-
-<div class="project-card">
-  <h3 data-sv="Freaky Fashion – Interaktiv E-handel med Angular & SQL"
-      data-en="Freaky Fashion – Interactive E-commerce with Angular & SQL">
-    Freaky Fashion - Interaktiv E-handel med Angular & SQL
-  </h3>
-
-  <!-- Bildgalleri -->
-  <div class="image-gallery">
-    <img src="img/f1.png" alt="Freaky Fashion Startsida" class="project-image active">
-    <img src="img/f2.png" alt="Freaky Fashion Produkter" class="project-image">
-    <img src="img/f3.png" alt="Freaky Fashion Mobil" class="project-image">
-    <img src="img/f4.png" alt="Freaky Fashion Mobil" class="project-image">
-    <img src="img/f6.png" alt="Freaky Fashion Mobil" class="project-image">
-    <img src="img/f7.png" alt="Freaky Fashion Mobil" class="project-image small-image">
+    <span class="p-link" style="cursor:default; border-bottom: 1px solid #ccc; color:#999;">Available on request</span>
+    <div class="p-img"><img src="img/mml_dashboard.png" alt="MML"></div>
   </div>
 
-  <!-- Dots för att byta bild -->
-  <div class="image-dots">
-    <span class="dot active" onclick="showImage(this.closest('.project-card'), 0)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 1)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 2)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 3)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 4)"></span>
-    <span class="dot" onclick="showImage(this.closest('.project-card'), 5)"></span>
+<div class="project reveal">
+    <div class="p-num">02</div>
+    <div class="p-title">Hanna Instruments Sweden</div>
+    <p class="p-desc">Scientific instruments e-commerce. Product data via API integration and SEO architecture.</p>
+    <div class="p-tags"><span class="p-tag hi">Shopify</span><span class="p-tag">E-commerce</span><span class="p-tag">API Integration</span></div>
+    <a href="https://hannainst.se/sv-se" target="_blank" class="p-link">hannainst.se ↗</a>
+    <div class="p-img"><img src="img/hanna2.png" alt="Hanna"></div>
   </div>
 
-  <!-- Beskrivning -->
-  <p data-sv="En uppdaterad variant av FreakyFashion där Angular och TypeScript används för interaktiva formulär, med SQL-databas för lagring och hantering av produktdata." 
-     data-en="An updated version of FreakyFashion where Angular and TypeScript are used for interactive forms, with an SQL database for storing and managing product data.">
-     En uppdaterad variant av FreakyFashion där Angular och TypeScript används för interaktiva formulär, med SQL-databas för lagring och hantering av produktdata.
-  </p>
+  <div class="project reveal">
+    <div class="p-num">03</div>
+    <div class="p-title">Innesvingen</div>
+    <p class="p-desc">Golf equipment store with custom discovery experience and brand filtering.</p>
+    <div class="p-tags"><span class="p-tag hi">Shopify</span><span class="p-tag hi">E-commerce</span></div>
+    <a href="https://innesvingen.se" target="_blank" class="p-link">innesvingen.se ↗</a>
+    <div class="p-img"><img src="img/innesvingen.png" alt="Innesvingen"></div>
+  </div>
 
-  <!-- Se kod-knapp -->
-  <a href="https://github.com/IsabelleBan/Javascript3-FreakyFashion.git" target="_blank" 
-     data-sv="Se kod" data-en="View Code">
-     Se kod
-  </a>
+  <div class="project reveal">
+    <div class="p-num">04</div>
+    <div class="p-title">Priét</div>
+    <p class="p-desc">Luxury jewellery e-commerce for engagement and wedding rings. Bilingual site with a refined brand identity.</p>
+    <div class="p-tags">
+      <span class="p-tag hi">Shopify</span>
+      <span class="p-tag">E-commerce</span>
+      <span class="p-tag">API integration</span>
+    </div>
+    <div class="p-img"><img src="img/priet.png" alt="Priet"></div>
+  </div>
+
+  <div class="project reveal">
+    <div class="p-num">05</div>
+    <div class="p-title">Norrsken</div>
+    <p class="p-desc">Scandinavian women's outerwear brand.</p>
+    <div class="p-tags"><span class="p-tag hi">Shopify</span><span class="p-tag hi">E-commerce</span></div>
+    <div class="p-img"><img src="img/norrsken.png" alt="Norrsken"></div>
+  </div>
+
+  <div class="project reveal">
+    <div class="p-num">06</div>
+    <div class="p-title">Five Seasons</div>
+    <p class="p-desc">Outdoor clothing e-commerce for men, women and children. Seasonal campaign focus.</p>
+    <div class="p-tags"><span class="p-tag hi">Shopify</span><span class="p-tag hi">E-commerce</span></div>
+    <div class="p-img"><img src="img/fiveseasons.png" alt="Five Seasons"></div>
+  </div>
+
+  <div class="project reveal">
+  <div class="p-num">07</div>
+  <div class="p-title">MHK Foods</div>
+  <p class="p-desc">WordPress e-commerce rebuild for a Swedish food wholesaler. Contributed to homepage and product page development.</p>
+  <div class="p-tags">
+    <span class="p-tag hi">WordPress</span>
+    <span class="p-tag">E-commerce</span>
+    <span class="p-tag">WooCommerce</span>
+  </div>
+  <div class="p-img"><img src="img/mhk.png" alt="MHK Foods"></div>
 </div>
-</section>
 
-<section id="skills">
-  <h2 data-sv="Skills" data-en="Skills">Skills</h2>
-  <div class="skills-grid">
-    <div class="skill-card">HTML, CSS</div>
-    <div class="skill-card">JavaScript 1</div>
-    <div class="skill-card" data-sv="Agil utveckling & SCRUM" data-en="Agile Development & SCRUM">Agil utveckling & SCRUM</div>
-    <div class="skill-card" data-sv="Git och versionshantering" data-en="Git and Version Control">Git och versionshantering</div>
-    <div class="skill-card">UX/UI</div>
-    <div class="skill-card">JavaScript 2, React</div>
-    <div class="skill-card">JavaScript 3, Angular</div>
-    <div class="skill-card" data-sv="Backend 1, API:er och databashantering (Node.js, Express, SQLite)" 
-         data-en="Backend 1, APIs and Database Management (Node.js, Express, SQLite)">
-         Backend 1, API:er och databashantering (Node.js, Express, SQLite)
+  <div class="project reveal">
+    <div class="p-num">08</div>
+    <div class="p-title">Frontic</div>
+    <p class="p-desc">Service company website for grounds maintenance. Product catalogue and contact flow.</p>
+    <div class="p-tags"><span class="p-tag hi">Shopify</span></div>
+    <div class="p-img"><img src="img/frontic.png" alt="Frontic"></div>
+  </div>
+
+  <div class="project reveal">
+    <div class="p-num">09</div>
+    <div class="p-title">Paria Kadir</div>
+    <p class="p-desc">Personal website for music producer. Visual identity, layout and custom architecture.</p>
+    <div class="p-tags"><span class="p-tag hi">HTML</span><span class="p-tag hi">CSS</span><span class="p-tag hi">JavaScript</span></div>
+    <a href="https://pariakadir.com" target="_blank" class="p-link">pariakadir.com ↗</a>
+    <div class="p-img"><img src="img/paria1.png" alt="Paria"></div>
+  </div>
+</div>
+
+<div class="about" id="about">
+  <div class="about-inner">
+    <div class="about-left reveal">
+      <span class="section-label" style="display:block; margin-bottom:20px;">About</span>
+      <h2>Developer.<br>Builder.<br><em>Problem solver.</em></h2>
+      <p>I'm a fullstack developer based in Gothenburg, graduating from EC Utbildning in June 2026. Currently CTO and product owner at Method & Matter Labs, a concept in early development. Background in logistics — I think in systems, processes and traceability.</p>
     </div>
-    <div class="skill-card" data-sv="Backend 2, objekt orienterad programmering med C#" 
-         data-en="Backend 2, Object-Oriented Programming with C#">
-         Backend 2, objekt orienterad programmering med C#
+    <div class="about-right reveal">
+      <div class="info-row"><span>Location</span><strong>Gothenburg, Sweden</strong></div>
+      <div class="info-row"><span>Education</span><strong>EC Utbildning — Jun 2026</strong></div>
+      <div class="info-row"><span>Current role</span><strong>CTO @ Method & Matter Labs</strong></div>
+      <div class="info-row"><span>Experience</span><strong>Freelance · LIA · Startup</strong></div>
+      <div class="info-row"><span>Languages</span><strong>Swedish · English</strong></div>
+      <div class="info-row"><span>Certified</span><strong>Shopify Development</strong></div>
+      <div style="margin-top: 40px;">
+        <span class="skill">React</span>
+        <span class="skill">TypeScript</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">Supabase</span>
+        <span class="skill">Node.js</span>
+        <span class="skill">PostgreSQL</span>
+        <span class="skill">Shopify</span>
+        <span class="skill">WordPress</span>
+        <span class="skill">C# / OOP</span>
+        <span class="skill">Angular</span>
+        <span class="skill">Git</span>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<section id="additional-skills">
-  <h2 data-sv="Additional Skills" data-en="Additional Skills">Additional Skills</h2>
-  <div class="skills-grid">
-    <div class="skill-card">WordPress</div>
-    <div class="skill-card">Python</div>
+<div id="contact">
+  <div class="contact-section">
+    <div class="reveal">
+      <span class="section-label" style="display:block; margin-bottom:32px;">Contact</span>
+      <h2>Let's work<br><em>together.</em></h2>
+    </div>
+    <div class="contact-links reveal">
+      <a href="mailto:banjacisabelle@gmail.com" class="c-link">
+        <span class="c-link-label">Email</span>
+        <span class="c-link-sub">banjacisabelle@gmail.com</span>
+      </a>
+      <a href="https://www.linkedin.com/in/isabelle-banjac" target="_blank" class="c-link">
+        <span class="c-link-label">LinkedIn</span>
+        <span class="c-link-sub">isabelle-banjac</span>
+      </a>
+      <a href="https://github.com/IsabelleBan" target="_blank" class="c-link">
+        <span class="c-link-label">GitHub</span>
+        <span class="c-link-sub">IsabelleBan</span>
+      </a>
+    </div>
   </div>
-</section>
+</div>
 
-<section id="contact">
-  <h2 data-sv="Kontakt" data-en="Contact">Kontakt</h2>
-  <p><span data-sv="Mail:" data-en="Email:">Mail:</span> <a href="mailto:banjacisabelle@gmail.com">banjacisabelle@gmail.com</a></p>
-  <p><span data-sv="LinkedIn:" data-en="LinkedIn:">LinkedIn:</span> <a href="https://www.linkedin.com/in/isabelle-banjac" target="_blank">linkedin.com/in/isabelle-banjac</a></p>
-  <p><span data-sv="GitHub:" data-en="GitHub:">GitHub:</span> <a href="https://github.com/IsabelleBan" target="_blank">https://github.com/IsabelleBan</a></p>
-  <p><span data-sv="Telefon:" data-en="Phone:">Telefon:</span> 0733 92 49 02</p>
-</section>
-
-
-  <footer>
-    <p></p>&copy; 2025 Isabelle Banjac.</p>
-  </footer>
+<footer>
+  <span>© 2026 Isabelle Banjac</span>
+  <span>Gothenburg · Sweden</span>
+</footer>
 
 <script>
-    // Your existing language toggle code
-    let currentLanguage = 'sv';
-
-    function toggleLanguage() {
-        const button = document.querySelectorAll('.language-toggle'); // Updated to work with multiple buttons
-        const elementsWithTranslation = document.querySelectorAll('[data-sv][data-en]');
-        
-        if (currentLanguage === 'sv') {
-            currentLanguage = 'en';
-            button.forEach(btn => btn.textContent = 'SV'); // Updated to handle both desktop and mobile buttons
-            
-            elementsWithTranslation.forEach(element => {
-                element.textContent = element.getAttribute('data-en');
-            });
-        } else {
-            currentLanguage = 'sv';
-            button.forEach(btn => btn.textContent = 'EN'); // Updated to handle both desktop and mobile buttons
-            
-            elementsWithTranslation.forEach(element => {
-                element.textContent = element.getAttribute('data-sv');
-            });
-        }
-    }
-
-    // Add the new burger menu functions here
-    function toggleMobileMenu() {
-        const burger = document.querySelector('.burger-menu');
-        const overlay = document.querySelector('.nav-overlay');
-        
-        burger.classList.toggle('active');
-        overlay.classList.toggle('active');
-        
-        // Prevent body scroll when menu is open
-        if (overlay.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    }
-
-    function closeMobileMenu() {
-        const burger = document.querySelector('.burger-menu');
-        const overlay = document.querySelector('.nav-overlay');
-        
-        burger.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        const burger = document.querySelector('.burger-menu');
-        const overlay = document.querySelector('.nav-overlay');
-        
-        if (burger && overlay && !burger.contains(e.target) && !overlay.contains(e.target)) {
-            closeMobileMenu();
-        }
-    });
-
-    let currentImageIndex = 0;
-
-function showImage(card, index) {
-  // Hämta bara bilderna i det kortet
-  const images = card.querySelectorAll('.project-image');
-  const dots = card.querySelectorAll('.dot');
-
-  images.forEach((img, i) => {
-    img.classList.toggle('active', i === index);
+  const cur = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
   });
 
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('active', i === index);
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
   });
-}
 
-// Optional: Auto-rotate through images
-function autoRotateImages() {
-    const images = document.querySelectorAll('.project-image');
-    if (images.length > 1) {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        showImage(currentImageIndex);
-    }
-}
-
-// Optional: Start auto-rotation (uncomment if you want this)
-// setInterval(autoRotateImages, 4000); // Changes image every 4 seconds
-
-// Optional: Add keyboard navigation
-document.addEventListener('keydown', function(e) {
-    const images = document.querySelectorAll('.project-image');
-    if (e.key === 'ArrowLeft' && images.length > 1) {
-        currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : images.length - 1;
-        showImage(currentImageIndex);
-    } else if (e.key === 'ArrowRight' && images.length > 1) {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        showImage(currentImageIndex);
-    }
-});
-
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
-
 </body>
 </html>
-
-
